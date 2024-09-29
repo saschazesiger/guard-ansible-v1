@@ -25,11 +25,7 @@
         from_ip: "{{ item }}"
         port: 'any'
         proto: 'any'
-      with_items:
-        - 185.223.30.25
-        - 49.12.199.129
-        - 49.13.145.225
-        - 85.1.162.29
+      with_items: "{{ lookup('env', 'ALLOWED_IPS') | split(',') }}"
 
     - name: Allow HTTP (Port 80) and HTTPS (Port 443) for all
       ufw:
